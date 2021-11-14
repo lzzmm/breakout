@@ -1,6 +1,4 @@
-## 
-
-DCS245 <br>Reinforcement Learning and Game Theory<br>2021 Fall
+## DCS245 <br>Reinforcement Learning and Game Theory<br>2021 Fall
 
 # Mid-term Assignment
 
