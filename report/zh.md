@@ -24,15 +24,15 @@
 
 ### 1.2 MDP
 
-马尔可夫决策过程中下一个状态仅取决于当前的状态和当前的动作。一个基本的 MDP 可以用 $(S,A,P)$ 来表示，$S$表示状态，$A$表示动作，$P$表示状态转移概率，也就是根据当前的状态$s_t$和$a_t$转移到$s_{t+1}$的概率。状态的好坏等价于对未来回报的期望，引入**回报Return**来表示某个时刻$t$的状态将具备的回报，也就是 $G_t$。$R$ 表示反馈，$\gamma$ 是折扣因子。
+马尔可夫决策过程中下一个状态仅取决于当前的状态和当前的动作。一个基本的 MDP 可以用 $(S,A,P)$ 来表示，$S$表示状态，$A$表示动作，$P$表示状态转移概率，也就是根据当前的状态$s_t$和动作$a_t$转移到$s_{t+1}$的概率。状态的好坏等价于对未来回报的期望，引入**回报Return**来表示某个时刻$t$的状态将具备的回报，也就是 $G_t$。$R$ 表示反馈，$\gamma$ 是折扣因子。
 $$
 G_t = R_{t+1} + \gamma R_{t+2} + \dots = \sum^{\infin}_{k=0}\gamma ^k R_{t+k+1}
 $$
-价值函数用来表示一个状态的长期潜在价值，也就是回报的期望
+价值函数用来表示一个状态的长期潜在价值，也就是回报的期望。
 $$
 v(s) = \mathbb{E}\left[ G_t | S_t = s \right]
 $$
-价值函数可以被分解为两部分，一个是立即反馈 $R_{t+1}$，还有一个是下一个状态的价值乘上折扣
+价值函数可以被分解为两部分，一个是立即反馈 $R_{t+1}$，还有一个是下一个状态的价值乘上折扣。
 $$
 \begin{align*}
 v(s) &= \mathbb{E} \left[ G_t | S_t = s \right]\\
@@ -49,7 +49,7 @@ $$
 
 ###  1.3 Q-Learning
 
-考虑到每个状态之后都有多种动作可以选择，每个动作之下的状态又多不一样，我们更关心在某个状态下的不同动作的价值。我们使用 Action-Value function 来表示在 $s$ 状态下执行 $\pi$ 策略之后获得的回报。
+考虑到每个状态下都有多种动作可以选择，每个动作之下的状态又多不一样，我们更关心在某个状态下的不同动作的价值。我们使用 Action-Value function 来表示在 $s$ 状态下执行 $\pi$ 策略之后获得的回报。
 $$
 q_{\pi}(s,a)=\mathbb{E}_{\pi}\left[ G_t | S_t=s,A_t=a \right]
 $$
@@ -99,8 +99,6 @@ NIPS 2013 提出的 DQN 算法如下：
 2015年初，DeepMind 又在 Nature 期刊上提出了更新，此次将模型更改为使用两个 Q 网络，一个策略网络用来更新网络和选择动作，另一个目标网络用来计算目标 Q 值。目标网络延时更新。算法如下。
 
 ![N_DQN_algo](img/Nature_DQN_algo.png)
-
-
 
 ## 2 dqn-breakout[$^1$](https://gitee.com/goluke/dqn-breakout)  的结构解析
 
@@ -323,7 +321,9 @@ class Dueling-DQN(nn.Module):
 
 
 
-## 4 Experiments
+## 4 实验
+
+### 4.1 反馈分析
 
 我们的实验在前一百万次把 $\epsilon$ 从 `1` 降低到 `0.1`，又花了一百万次降低到 `0.01`。以下是我们对实验结果的分析。
 
@@ -331,7 +331,7 @@ class Dueling-DQN(nn.Module):
 
 *Figure 1: Sampled every $10^6$ episodes,  $6666 \times 10^4$  episodes.*
 
-首先从这张平滑过后的平均反馈图可以看到，在前一千六百万次左右的训练中，Dueling-DQN 大部分时间要比 DQN 高，说明训练的比较快。在四千万次训练之前，DQN 一直保持低于 Dueling-DQN 的反馈。到了三千五百万次到四千万次左右训练的时候，DQN 才又开始增长。四千万次训练之后 DQN 的平均反馈值略高于 Dueling-DQN 的平均反馈值。不过这也和 Dueling-DQN 论文中的结果相似，他们在测试 Breakour 的时候确实最后结果不如 DQN，但是拟合速度略快，我们推测这是由于 Breakout 中的动作比较少，所以提升不明显。
+首先从这张平滑过后的平均反馈图可以看到，在前一千六百万次左右的训练中，Dueling-DQN 大部分时间要比 DQN 高，说明训练的比较快。在四千万次训练之前，DQN 一直保持低于 Dueling-DQN 的反馈。到了三千五百万次到四千万次左右训练的时候，DQN 才又开始增长。四千万次训练之后 DQN 的平均反馈值略高于 Dueling-DQN 的平均反馈值。不过这也和 Dueling-DQN 论文中的结果相似，他们在测试 Breakout 的时候确实最后结果不如 DQN，但是拟合速度略快，我们推测这是由于 Breakout 中的动作比较少，所以提升不明显。
 
 
 
@@ -361,17 +361,19 @@ class Dueling-DQN(nn.Module):
 
 *Figure 4: Dueling-DQN's average reward per every $5 \times 10^4$ episodes, $2000 \times 10^4$ episodes.*
 
+### 4.2 游戏视频
 
+以上两个智能体的游戏视频在[这里](https://www.bilibili.com/video/BV1XL411u7XM/)。
 
 ## 5 总结
 
 ### 5.1 总结
 
+这次实验的主要任务是学习基础的 Nature-DQN 的实现，然后在此基础上做一定的优化，我们选择的优化方向是 Dueling DQN。Dueling DQN 的改进在于神经网络，原来的神经网络由3个卷积层和2个全连接层组成，Dueling DQN 将最后的两个全连接层拆分成两部分，每个部分分别做两个全连接层。实验结果显示，Dueling DQN 的收敛速度比 Nature-DQN 快，但最终的 reward 较 Nature-DQN 稍差。
 
+### 5.2 开源仓库
 
-### 5.2 Open Source Repository
-
-Our code and report are open source at [lzzmm/breakout](https://github.com/lzzmm/breakout).
+我们的代码和报告开源在[lzzmm/breakout](https://github.com/lzzmm/breakout)。
 
 ### 5.3 Authorship
 
