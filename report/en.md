@@ -375,8 +375,8 @@ Our code and report are open source at [lzzmm/breakout](https://github.com/lzzmm
 
 | Name   | ID         | Ideas(%) | Coding(%) | Writing(%) |
 | ------ | ---------- | -------- | --------- | ---------- |
-| 陈禹翰 | `19335025` | `50%`    | `40%`     | `60%`      |
-| 陈煜彦 | `19335026` | `50%`    | `60%`     | `40%`      |
+| 陈禹翰 | `19335025` | `0%`     | `0%`      | `0%`       |
+| 陈煜彦 | `19335026` | `0%`     | `0%`      | `0%`       |
 
 ## References
 
