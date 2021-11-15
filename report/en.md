@@ -359,7 +359,7 @@ The following two pictures are their magnifications before fitting.
 
 ### 4.2 Video
 
-How this two agents play breakout is on [here](https://www.bilibili.com/video/BV1XL411u7XM/).
+The video of these two agents playing breakout is [here](https://www.bilibili.com/video/BV1XL411u7XM/).
 
 ## 5 Summary
 
