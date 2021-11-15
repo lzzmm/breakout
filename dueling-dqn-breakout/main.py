@@ -14,12 +14,12 @@ START_STEP = 66_370_000# start steps when using pretrained model or 0
 GAMMA = 0.99           # discount factor
 GLOBAL_SEED = 0        # global seed initialize
 MEM_SIZE = 100_000     # memory size
-RENDER = True         # if true, render gameplay frames 
+RENDER = False         # if true, render gameplay frames 
 
 STACK_SIZE = 4         # stack size
 
-EPS_START = 0.01       # starting epsilon for epsilon-greedy alogrithm
-EPS_END = 0.01         # after decay steps, spsilon will reach this and keep
+EPS_START = 1.         # starting epsilon for epsilon-greedy alogrithm
+EPS_END = 0.1          # after decay steps, spsilon will reach this and keep
 EPS_DECAY = 1_000_000  # steps for epsilon to decay
 
 BATCH_SIZE = 32        # batch size of TD-learning traning value network
