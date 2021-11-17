@@ -1,9 +1,8 @@
 # breakout
-Mid-term assignment of DCS245 Reinforcement Learning and Game Theory Fall 2021 by 19335025 Chen Yuhan and 19335026 Chen Yuyan.
 
+> Mid-term assignment of DCS245 Reinforcement Learning and Game Theory Fall 2021 by 19335025 Chen Yuhan and 19335026 Chen Yuyan.
 
-
-
+[中文](https://github.com/lzzmm/breakout/blob/main/report/zh.md)
 
 ## 0 Background
 
@@ -197,8 +196,6 @@ if step % EVALUATE_FREQ == 0:
     done = True
 ```
 
-
-
 ### 2.2 `utils_drl.py`
 
 The `Agent` class is implemented in `utils_drl.py`, the model parameters are initialized when the trained model is not passed in, and loaded when the trained model is passed in parameters.
@@ -223,39 +220,37 @@ Four functions are defined in the `Agent` class, as follows:
 
 2. The `learn()` function implements updating the parameters of the neural network:
 
-   ```python
-   def learn(self, memory: ReplayMemory, batch_size: int) -> float:
-       """learn trains the value network via TD-learning."""
-       # get random sample from memory
-       state_batch, action_batch, reward_batch, next_batch,
-       done_batch = \
-       memory.sample(batch_size)
-       # excepted values of current state
-       values = self.__policy(state_batch.float()).gather(1,
-       action_batch)
-       # excepted values of next state
-       values_next =
-       self.__target(next_batch.float()).max(1).values.detach()
-       # actual values of current state = gamma * values_next + reward
-       expected = (self.__gamma * values_next.unsqueeze(1)) * \
-       (1. - done_batch) + reward_batch
-       # loss
-       loss = F.smooth_l1_loss(values, expected)
-       self.__optimizer.zero_grad()
-       # d
-       loss.backward()
-       for param in self.__policy.parameters():
-       param.grad.data.clamp_(-1, 1)
-       # update policy network
-       self.__optimizer.step()
-   	return loss.item()
-   ```
+    ```python
+    def learn(self, memory: ReplayMemory, batch_size: int) -> float:
+        """learn trains the value network via TD-learning."""
+        # get random sample from memory
+        state_batch, action_batch, reward_batch, next_batch,
+        done_batch = \
+        memory.sample(batch_size)
+        # excepted values of current state
+        values = self.__policy(state_batch.float()).gather(1,
+        action_batch)
+        # excepted values of next state
+        values_next =
+        self.__target(next_batch.float()).max(1).values.detach()
+        # actual values of current state = gamma * values_next + reward
+        expected = (self.__gamma * values_next.unsqueeze(1)) * \
+        (1. - done_batch) + reward_batch
+        # loss
+        loss = F.smooth_l1_loss(values, expected)
+        self.__optimizer.zero_grad()
+        # d
+        loss.backward()
+        for param in self.__policy.parameters():
+        param.grad.data.clamp_(-1, 1)
+        # update policy network
+        self.__optimizer.step()
+    return loss.item()
+    ```
 
 3. The `sync()` function updates the target network to the strategy network;
 
 4. The `save()` function saves the current strategy network parameters.
-
-
 
 ### 2.3 `utils_env.py`
 
@@ -375,6 +370,3 @@ Our code and report are open source at [lzzmm/breakout](https://github.com/lzzmm
 [Human-level control through deep reinforcement learning](https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf)
 
 [Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/abs/1511.06581v3)
-
-
-
