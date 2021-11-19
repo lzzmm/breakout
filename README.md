@@ -343,8 +343,6 @@ The following two pictures are their magnifications before fitting.
 
 *Figure 3: DQN's average reward per every $5 \times 10^4$ episodes, $2000 \times 10^4$ episodes.*
 
-
-
 ![fig4](report/img/Figure_4.png)
 
 *Figure 4: Dueling-DQN's average reward per every $5 \times 10^4$ episodes, $2000 \times 10^4$ episodes.*
