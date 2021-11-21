@@ -102,7 +102,7 @@ In early 2015, DeepMind proposed an update in the Nature journal. This time the 
 
 ### 2.1 `main.py`
 
-`mian.py` is the entry point of the entire program. It first defines these constants:
+`main.py` is the entry point of the entire program. It first defines these constants:
 
 ```c
 START_STEP = 0         # start steps when using pretrained model
@@ -132,9 +132,9 @@ EVALUATE_FREQ = 10_000 # evaluate frequency
 - `MEM_SIZE` is the `capacity` in `ReplayMemory`;
 - When `RENDER` is `TRUE`, the game process will be rendered during each evaluation;
 - `STACK_SIZE` is `channels` in `ReplayMemory`;
-- `EPS_START` and `EPS_END` are the start and end values of the attenuation of $\epsilon $ in the step of `EPS_DECAY`. After that, $\epsilon$ remains at `EPS_END`. It is worth mentioning that at the beginning, `EPS_START` will be ` 1`, but it is necessary to change to a smaller value when loading the model later to continue training, otherwise the performance of the loaded model will not perform well;
+- `EPS_START` and `EPS_END` are the start and end values of the attenuation of $\epsilon $ in the step of `EPS_DECAY`. After that, $\epsilon$ remains at `EPS_END`. It is worth mentioning that at the beginning, `EPS_START` will be `1`, but it is necessary to change to a smaller value when loading the model later to continue training, otherwise the performance of the loaded model will not perform well;
 - `BATCH_SIZE` is the number of samples when sampling from `ReplayMemory`;
-- `POLICY_UPDATE` is the update frequency of that the policy network;
+- `POLICY_UPDATE` is the update frequency of the policy network;
 - `TARGET_UPDATE` is the update frequency of the target network;
 - `WARM_STEPS` is to wait until there are enough records in `ReplayMemory` to lower $\epsilon$;
 - `MAX_STEPS` is the number of training steps;
@@ -385,6 +385,5 @@ Our code and report are open source at [lzzmm/breakout](https://github.com/lzzmm
 [Human-level control through deep reinforcement learning](https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf)
 
 [Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/abs/1511.06581v3)
-
 
 
